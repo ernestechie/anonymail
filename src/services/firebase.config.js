@@ -1,4 +1,5 @@
 import { initializeApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
 import { collection, getDocs, getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -13,6 +14,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 const db = getFirestore(app);
 const usersCol = collection(db, 'users');
 
@@ -22,3 +24,5 @@ export default async function getUsers(db) {
   const userList = userSnapshot.docs.map((doc) => doc.data());
   console.log(userList);
 }
+
+export { auth, db, usersCol };

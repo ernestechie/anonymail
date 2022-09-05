@@ -2,36 +2,66 @@ import { useState } from 'react';
 // ? REACT ICONS
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { FiLock } from 'react-icons/fi';
-import { HiOutlineUser } from 'react-icons/hi';
-import { Link } from 'react-router-dom';
+import { IoMailOutline } from 'react-icons/io5';
+import { Link, useNavigate } from 'react-router-dom';
 // ? REACT TOASTIFY
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BusyIndicator } from '../components';
 
-import getUsers from '../services/firebase.config';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
+
+import { auth, db } from '../services/firebase.config';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const navigate = useNavigate();
+
   const toggleShowPassword = () => {
     setShowPassword((prev) => !prev);
+  };
+
+  const emailChangeHandler = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const passwordChangeHandler = (e) => {
+    setPassword(e.target.value);
   };
 
   const loginHandler = (e) => {
     e.preventDefault();
     setIsLoading(true);
 
-    getUsers().then(() => {
-      setIsLoading(false);
-      toast('Button was clicked', {
-        autoClose: 2000,
-        hideProgressBar: true,
-        pauseOnHover: false,
-        draggable: false,
+    signInWithEmailAndPassword(auth, email, password)
+      .then((credential) => {
+        getDoc(doc(db, 'users', credential.user.uid)).then((data) => {
+          setIsLoading(false)
+          console.log(data);
+          toast.success('Logged in successfully', {
+            autoClose: 2000,
+          });
+
+          setTimeout(() => {
+            setIsLoading(false);
+            setEmail('');
+            setPassword('');
+            navigate('/user');
+          }, 1000);
+        });
+      })
+      .catch((error) => {
+        setIsLoading(false)
+        toast.error(error.code, {
+          autoClose: 2000,
+        });
       });
-    });
   };
 
   return (
@@ -42,10 +72,16 @@ const Login = () => {
         {isLoading && <BusyIndicator />}
         <form className='mt-10'>
           <div className='input-group'>
-            <label htmlFor='username'>Username</label>
-            <input type='text' id='username' placeholder='Username' />
+            <label htmlFor='email'>Email</label>
+            <input
+              type='email'
+              id='email'
+              placeholder='Email'
+              onChange={emailChangeHandler}
+              value={email}
+            />
             <span className='icon'>
-              <HiOutlineUser />
+              <IoMailOutline />
             </span>
           </div>
           {/*  */}
@@ -55,6 +91,8 @@ const Login = () => {
               type={showPassword ? 'text' : 'password'}
               id='password'
               placeholder='Password'
+              onChange={passwordChangeHandler}
+              value={password}
             />
             <span className='icon'>
               <FiLock />

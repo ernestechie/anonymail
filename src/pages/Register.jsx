@@ -1,40 +1,79 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-// ? REACT ICONS
+import { Link, useNavigate } from 'react-router-dom';
+// ? Firebase imports
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
+// ? React Icons
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { FiLock } from 'react-icons/fi';
 import { HiOutlineUser } from 'react-icons/hi';
 import { IoMailOutline } from 'react-icons/io5';
-// ? REACT TOASTIFY
+// ? React Toastify
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// ? COMPONENTS
+// ? Components
 import { BusyIndicator } from '../components';
 
-import getUsers from '../services/firebase.config';
+import { auth, db } from '../services/firebase.config';
 
 const Register = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  console.log(isLoading);
+
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const toggleShowPassword = () => {
     setShowPassword((prev) => !prev);
+  };
+
+  const emailChangeHandler = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const usernameChangeHandler = (e) => {
+    setUsername(e.target.value);
+  };
+
+  const passwordChangeHandler = (e) => {
+    setPassword(e.target.value);
   };
 
   const registerHandler = (e) => {
     e.preventDefault();
     setIsLoading(true);
 
-    getUsers().then(() => {
-      setIsLoading(false);
-      toast('Button was clicked', {
-        autoClose: 2000,
-        hideProgressBar: true,
-        pauseOnHover: false,
-        draggable: false,
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((credential) => {
+        setDoc(doc(db, 'users', credential.user.uid), {
+          email: email,
+          messages: [],
+          referral_link: `http:localhost:3000/send/${username}`,
+          timeStamp: serverTimestamp(),
+          username: username,
+        }).then(() => {
+          toast.success('Account created', {
+            autoClose: 2000,
+          });
+
+          setTimeout(() => {
+            setIsLoading(false);
+            setEmail('');
+            setUsername('');
+            setPassword('');
+            navigate('/user');
+          }, 1000);
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(error.code, {
+          autoClose: 2000,
+        });
+        setIsLoading(false);
       });
-    });
   };
 
   return (
@@ -46,7 +85,13 @@ const Register = () => {
         <form className='mt-10'>
           <div className='input-group'>
             <label htmlFor='email'>Email</label>
-            <input type='email' id='email' placeholder='Enter your email' />
+            <input
+              type='email'
+              id='email'
+              placeholder='Enter your email'
+              value={email}
+              onChange={emailChangeHandler}
+            />
             <span className='icon'>
               <IoMailOutline />
             </span>
@@ -58,6 +103,8 @@ const Register = () => {
               type='text'
               id='username'
               placeholder='Enter your username'
+              value={username}
+              onChange={usernameChangeHandler}
             />
             <span className='icon'>
               <HiOutlineUser />
@@ -69,7 +116,9 @@ const Register = () => {
             <input
               type={showPassword ? 'text' : 'password'}
               id='password'
+              value={password}
               placeholder='Password must be 6 digits or more'
+              onChange={passwordChangeHandler}
             />
             <span className='icon'>
               <FiLock />
