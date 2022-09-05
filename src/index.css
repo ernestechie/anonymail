@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .input-group {
+    @apply py-2 relative;
+  }
+
+  .input-group label {
+    @apply block font-bold uppercase text-sm;
+  }
+
+  .input-group input {
+    @apply py-3 my-2 border-2 border-purple-700 w-full rounded-md outline-none pl-10;
+  }
+
+  .input-group .icon {
+    @apply absolute top-[3.2rem] left-4 text-xl;
+  }
+
+  .input-group .icon-reverse {
+    @apply absolute top-[3.2rem] right-6 text-xl text-purple-700;
+  }
+
+  .input-group .icon * {
+    @apply text-purple-700;
+  }
+
+  .page.register,
+  .page.login {
+    @apply h-screen w-screen p-8 bg-gray-100 flex justify-center items-center;
+  }
+
+  .page.login .form {
+    @apply h-[460px];
+  }
+
+  .page .form {
+    @apply h-[560px] max-w-[400px] p-6 bg-white w-full py-10 rounded-xl;
+  }
+  .page .form .submit-button {
+    @apply bg-purple-700 w-full p-3 rounded-md font-bold text-white hover:bg-purple-800 duration-300 transition;
+  }
+
+  * {
+    @apply font-lato;
+  }
+}
