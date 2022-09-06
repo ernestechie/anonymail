@@ -5,7 +5,7 @@ const NotFound = () => {
   return (
     <div>
       <h1>404. This page does not exist.</h1>
-      <Link to='/user'>Go back {'<'} </Link>
+      <Link to='/login'>Go back {'<'} </Link>
     </div>
   );
 };

@@ -1,8 +1,11 @@
 import React from 'react';
 import { MessageCard, Navbar } from '../../components/index';
 import messages from '../../services/messages';
+import useAuth from '../../services/useAuth';
 
 const Inbox = () => {
+  useAuth();
+
   return (
     <>
       <Navbar />

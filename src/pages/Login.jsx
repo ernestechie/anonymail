@@ -40,7 +40,7 @@ const Login = () => {
           setIsLoading(false);
           setEmail('');
           setPassword('');
-          navigate('/user');
+          navigate('/user/home');
         }, 1000);
       })
       .catch((error) => {

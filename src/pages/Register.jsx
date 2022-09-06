@@ -50,7 +50,7 @@ const Register = () => {
           setEmail('');
           setUsername('');
           setPassword('');
-          navigate('/user');
+          navigate('/user/home');
         }, 1000);
       })
       .catch((error) => {
