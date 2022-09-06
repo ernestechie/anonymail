@@ -14,7 +14,7 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path='/' element={<Landing />} exact />
+        <Route path='/' element={<Register />} exact />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/send/:receiverID' element={<Landing />} exact />
