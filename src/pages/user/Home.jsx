@@ -1,6 +1,8 @@
-import React from 'react';
+import useAuth from '../../services/useAuth';
 
 const Home = () => {
+  useAuth();
+
   return (
     <div>
       <div>Welcome, {}</div>

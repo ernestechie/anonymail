@@ -9,15 +9,11 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BusyIndicator } from '../components';
 
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
-
-import { auth, db } from '../services/firebase.config';
+import login from '../services/login';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -38,26 +34,17 @@ const Login = () => {
   const loginHandler = (e) => {
     e.preventDefault();
     setIsLoading(true);
-
-    signInWithEmailAndPassword(auth, email, password)
-      .then((credential) => {
-        getDoc(doc(db, 'users', credential.user.uid)).then((data) => {
-          setIsLoading(false)
-          console.log(data);
-          toast.success('Logged in successfully', {
-            autoClose: 2000,
-          });
-
-          setTimeout(() => {
-            setIsLoading(false);
-            setEmail('');
-            setPassword('');
-            navigate('/user');
-          }, 1000);
-        });
+    login(email, password)
+      .then(() => {
+        setTimeout(() => {
+          setIsLoading(false);
+          setEmail('');
+          setPassword('');
+          navigate('/user');
+        }, 1000);
       })
       .catch((error) => {
-        setIsLoading(false)
+        setIsLoading(false);
         toast.error(error.code, {
           autoClose: 2000,
         });

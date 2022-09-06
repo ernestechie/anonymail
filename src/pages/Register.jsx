@@ -1,8 +1,5 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-// ? Firebase imports
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
 // ? React Icons
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { FiLock } from 'react-icons/fi';
@@ -13,14 +10,12 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // ? Components
 import { BusyIndicator } from '../components';
-
-import { auth, db } from '../services/firebase.config';
+import register from '../services/register';
 
 const Register = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -44,28 +39,19 @@ const Register = () => {
   const registerHandler = (e) => {
     e.preventDefault();
     setIsLoading(true);
-
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((credential) => {
-        setDoc(doc(db, 'users', credential.user.uid), {
-          email: email,
-          messages: [],
-          referral_link: `http:localhost:3000/send/${username}`,
-          timeStamp: serverTimestamp(),
-          username: username,
-        }).then(() => {
-          toast.success('Account created', {
-            autoClose: 2000,
-          });
-
-          setTimeout(() => {
-            setIsLoading(false);
-            setEmail('');
-            setUsername('');
-            setPassword('');
-            navigate('/user');
-          }, 1000);
+    register(email, password, username)
+      .then(() => {
+        toast.success('Account created', {
+          autoClose: 2000,
         });
+
+        setTimeout(() => {
+          setIsLoading(false);
+          setEmail('');
+          setUsername('');
+          setPassword('');
+          navigate('/user');
+        }, 1000);
       })
       .catch((error) => {
         console.log(error);
