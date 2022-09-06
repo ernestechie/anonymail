@@ -1,4 +1,4 @@
-import busyIndicator from './BusyIndicator.svg';
+import busyIndicator from '../assets/BusyIndicator.svg';
 
 const BusyIndicator = () => {
   return (

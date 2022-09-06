@@ -1,7 +1,13 @@
 import React from 'react';
+import { Navbar } from '../../components';
 
 const Settings = () => {
-  return <div>Settings</div>;
+  return (
+    <>
+      <Navbar />
+      <section className='page'>Settings</section>
+    </>
+  );
 };
 
 export default Settings;

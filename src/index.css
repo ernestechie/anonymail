@@ -29,6 +29,10 @@
     @apply text-purple-700;
   }
 
+  .page {
+    @apply bg-gray-100 h-screen w-screen;
+  }
+
   .page.register,
   .page.login {
     @apply h-screen w-screen p-8 bg-gray-100 flex justify-center items-center;
@@ -47,5 +51,17 @@
 
   * {
     @apply font-lato;
+  }
+
+  .navbar {
+    @apply fixed bottom-0 right-0 p-3 w-full shadow-2xl z-10 bg-white;
+  }
+
+  .navbar .nav-item {
+    @apply flex items-center justify-center flex-col;
+  }
+
+  .navbar .nav-item > svg {
+    @apply text-xl;
   }
 }
