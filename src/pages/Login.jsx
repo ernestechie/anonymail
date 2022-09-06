@@ -9,7 +9,9 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BusyIndicator } from '../components';
 
-import login from '../services/login';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
+import { auth, db } from '../services/firebase.config';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -34,17 +36,18 @@ const Login = () => {
   const loginHandler = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    login(email, password)
-      .then(() => {
-        setTimeout(() => {
-          setIsLoading(false);
-          setEmail('');
-          setPassword('');
-          navigate('/user/home');
-        }, 1000);
+    signInWithEmailAndPassword(auth, email, password)
+      .then((credential) => {
+        getDoc(doc(db, 'users', credential.user.uid)).then(() => {
+          setTimeout(() => {
+            setIsLoading(false);
+            navigate('/user/home');
+          }, 1000);
+        });
       })
       .catch((error) => {
         setIsLoading(false);
+
         toast.error(error.code, {
           autoClose: 2000,
         });

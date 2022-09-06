@@ -10,7 +10,10 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // ? Components
 import { BusyIndicator } from '../components';
-import register from '../services/register';
+
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
+import { auth, db } from '../services/firebase.config';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -36,27 +39,32 @@ const Register = () => {
     setPassword(e.target.value);
   };
 
-  const registerHandler = (e) => {
+  const registerHandler = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    register(email, password, username)
-      .then(() => {
-        toast.success('Account created', {
-          autoClose: 2000,
-        });
 
-        setTimeout(() => {
-          setIsLoading(false);
-          setEmail('');
-          setUsername('');
-          setPassword('');
-          navigate('/user/home');
-        }, 1000);
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((credential) => {
+        setDoc(doc(db, 'users', credential.user.uid), {
+          email,
+          messages: [],
+          referral_link: `http:localhost:3000/send/${username}`,
+          timeStamp: serverTimestamp(),
+          username,
+        }).then(() => {
+          toast.success('Account created', {
+            autoClose: 2000,
+          });
+
+          setTimeout(() => {
+            setIsLoading(false);
+            navigate('/user/home');
+          }, 1000);
+        });
       })
       .catch((error) => {
-        console.log(error);
         toast.error(error.code, {
-          autoClose: 2000,
+          autoClose: 3000,
         });
         setIsLoading(false);
       });

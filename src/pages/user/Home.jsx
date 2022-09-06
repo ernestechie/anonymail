@@ -13,7 +13,6 @@ const Home = () => {
     if (user) {
       const docRef = doc(db, 'users', user.uid);
       getDoc(docRef).then((snapshot) => {
-        console.log(snapshot.data());
         setUsername(() => snapshot.data().username);
         setReferralLink(() => snapshot.data().referral_link);
       });

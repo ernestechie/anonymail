@@ -1,9 +1,10 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import messages from '../../services/messages';
+import useUserContext from '../../context/userContext';
 
 const Message = () => {
   const params = useParams();
+  const { messages } = useUserContext();
   const current = messages.find((message) => message.ID === params.messageID);
 
   return (

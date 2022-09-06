@@ -3,6 +3,7 @@ import React, { createContext, useContext, useState } from 'react';
 const initialState = {
   username: '',
   referral_link: '',
+  setReferralLink: () => {},
 };
 const userContext = createContext(initialState);
 
@@ -12,7 +13,12 @@ const UserContextProvider = ({ children }) => {
 
   return (
     <userContext.Provider
-      value={{ username, setUsername, referralLink, setReferralLink }}
+      value={{
+        username,
+        setUsername,
+        referralLink,
+        setReferralLink,
+      }}
     >
       {children}
     </userContext.Provider>
