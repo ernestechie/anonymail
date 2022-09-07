@@ -1,5 +1,5 @@
 import { onAuthStateChanged } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, onSnapshot } from 'firebase/firestore';
 import React, { useCallback, useEffect, useState } from 'react';
 import { BusyIndicator, MessageCard, Navbar } from '../../components/index';
 import { auth, db } from '../../services/firebase.config';
@@ -15,15 +15,12 @@ const Inbox = () => {
     setIsLoading(true);
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        const docRef = doc(db, 'users', user.uid);
-        getDoc(docRef)
-          .then((snapshot) => {
-            setMessages(() => [...snapshot.data().messages]);
-            setIsLoading(false);
-          })
-          .catch(() => {
-            setIsLoading(false);
-          });
+        setIsLoading(true);
+
+        onSnapshot(doc(db, 'users', user.uid), (doc) => {
+          setMessages(doc.data().messages.reverse());
+          setIsLoading(false);
+        });
       }
     });
   }, []);
@@ -32,8 +29,6 @@ const Inbox = () => {
     getMessages();
   }, [getMessages]);
 
-  const sortedMessages = messages.reverse();
-
   return (
     <>
       <Navbar />
@@ -41,20 +36,29 @@ const Inbox = () => {
       <section className='page'>
         <div className='max-w-[360px] m-auto py-8'>
           {!isLoading && !messages && (
-            <h1 className='font-bold text-2xl p-8'>You have no messages</h1>
+            <h1 className='font-bold text-2xl p-8 '>You have no messages</h1>
           )}
           {!isLoading && messages.length === 0 && (
             <h1 className='font-bold text-2xl p-8'>You have no messages</h1>
           )}
-
-          {sortedMessages.map((message) => (
-            <MessageCard
-              key={message.ID}
-              text={message.text}
-              path={message.ID}
-              timeStamp={message.timeStamp}
-            />
-          ))}
+          {!isLoading && messages.length > 0 && (
+            <div>
+              <h1 className='text-purple-700 font-black text-3xl text-center'>
+                YOUR MESSAGES
+              </h1>
+              <p className='font-bold text-center my-2'>
+                Scroll down to see old messages
+              </p>
+              {messages.map((message) => (
+                <MessageCard
+                  key={message.ID}
+                  text={message.text}
+                  path={message.ID}
+                  timeStamp={message.timeStamp}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </section>
     </>

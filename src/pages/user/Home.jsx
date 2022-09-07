@@ -1,7 +1,14 @@
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { useCallback, useEffect, useState } from 'react';
-import { IoCopySharp } from 'react-icons/io5';
+import { FaArrowRight } from 'react-icons/fa';
+import {
+  IoCopySharp,
+  IoLogoFacebook,
+  IoLogoInstagram,
+  IoLogoWhatsapp,
+} from 'react-icons/io5';
+import { Link } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BusyIndicator, Navbar } from '../../components';
@@ -50,18 +57,18 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      <section className='page'>
+      <section className='page h-screen bg-gray-100'>
         {isLoading && <BusyIndicator />}
         {!isLoading && (
-          <div className='max-w-[360px] text-center m-auto py-8'>
+          <div className='max-w-[360px] text-center m-auto pt-12'>
             <ToastContainer />
-            <h1 className='text-3xl font-bold'>
+            <h1 className='text-3xl font-black'>
               Welcome,{' '}
               <span className='uppercase font-black text-purple-700'>
                 {username}
               </span>
             </h1>
-            <p className='my-4 font-bold text-xl'>Your Link</p>
+            <p className='my-2 font-bold text-lg'>Your Link</p>
             <div className='text-white bg-gray-800 p-2 rounded-xl flex items-center justify-center gap-4 w-full'>
               <span>{referralLink}</span>
               <IoCopySharp
@@ -69,7 +76,7 @@ const Home = () => {
                 onClick={copyLinkHandler}
               />
             </div>
-            <div className='my-2'>
+            <div className='my-4'>
               <p className='text-lg mb-2'>
                 <span className='text-purple-700 font-black'>
                   {' '}
@@ -87,6 +94,26 @@ const Home = () => {
                 <span className='text-purple-700 font-black'> "Inbox" </span>
                 to see what they have sent to you.
               </p>
+            </div>
+            <div className='mt-8'>
+              <Link
+                to='/user/inbox'
+                className='w-full px-4 py-2 my-2 rounded-full text-white bg-purple-700 flex items-center justify-center gap-2'
+              >
+                View messages <FaArrowRight />
+              </Link>
+              <button className='home-share-btn bg-green-500'>
+                Share on WhatsApp
+                <IoLogoWhatsapp />
+              </button>
+              <button className='home-share-btn bg-blue-900'>
+                Share on Facebook
+                <IoLogoFacebook />
+              </button>
+              <button className='home-share-btn bg-red-500'>
+                Share on Instagram
+                <IoLogoInstagram />
+              </button>
             </div>
           </div>
         )}
