@@ -35,7 +35,10 @@ const Inbox = () => {
       <section className='page'>
         <div className='max-w-[360px] m-auto py-8'>
           {!isLoading && !messages && (
-            <h1 className='font-bold text-xl p-8'>You have no messages</h1>
+            <h1 className='font-bold text-2xl p-8'>You have no messages</h1>
+          )}
+          {!isLoading && messages.length === 0 && (
+            <h1 className='font-bold text-2xl p-8'>You have no messages</h1>
           )}
 
           {messages.map((message) => (
