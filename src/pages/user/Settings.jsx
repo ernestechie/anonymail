@@ -1,6 +1,5 @@
 import { signOut } from 'firebase/auth';
 import React from 'react';
-import { IoLogOut } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 import { Navbar } from '../../components';
 import useUserContext from '../../context/userContext';

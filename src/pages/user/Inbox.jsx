@@ -22,11 +22,11 @@ const Inbox = () => {
         });
       }
     });
-  }, [messages]);
+  }, []);
 
   useEffect(() => {
     getMessages();
-  }, []);
+  }, [getMessages]);
 
   return (
     <>

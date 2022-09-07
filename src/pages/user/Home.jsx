@@ -23,11 +23,11 @@ const Home = () => {
         });
       }
     });
-  }, [username]);
+  }, [setUsername, setReferralLink]);
 
   useEffect(() => {
     getUserData();
-  }, []);
+  }, [getUserData]);
 
   return (
     <>
