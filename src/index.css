@@ -5,6 +5,9 @@
 @tailwind utilities;
 
 @layer components {
+  body {
+    @apply overflow-x-hidden pb-16;
+  }
   .input-group {
     @apply py-2 relative;
   }
@@ -30,7 +33,7 @@
   }
 
   .page {
-    @apply bg-gray-100 h-screen w-screen;
+    @apply bg-gray-100 h-auto w-screen;
   }
 
   .page.register,
@@ -54,7 +57,7 @@
   }
 
   .navbar {
-    @apply fixed bottom-0 right-0 p-3 w-full shadow-2xl z-10 bg-white;
+    @apply fixed bottom-0 right-0 p-3 w-full shadow-2xl z-10 bg-white h-16;
   }
 
   .navbar .nav-item {

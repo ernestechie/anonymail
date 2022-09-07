@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import {
   Home,
   Inbox,
-  Landing,
   Login,
   Message,
   NotFound,

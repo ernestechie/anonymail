@@ -46,6 +46,7 @@ const Inbox = () => {
               key={message.ID}
               text={message.text}
               path={message.ID}
+              timeStamp={message.timeStamp}
             />
           ))}
         </div>

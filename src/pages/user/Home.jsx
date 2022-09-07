@@ -58,7 +58,7 @@ const Home = () => {
               </span>
             </h1>
             <p className='my-4 font-bold text-xl'>Your Link</p>
-            <div className='text-white bg-gray-800 p-2 rounded-xl flex items-center justify-center gap-4'>
+            <div className='text-white bg-gray-800 p-2 rounded-xl flex items-center justify-center gap-4 w-full'>
               <span>{referralLink}</span>
               <IoCopySharp
                 className='cursor-pointer'
