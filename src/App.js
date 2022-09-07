@@ -7,6 +7,7 @@ import {
   Message,
   NotFound,
   Register,
+  Send,
   Settings,
 } from './pages';
 
@@ -17,7 +18,7 @@ const App = () => {
         <Route path='/' element={<Register />} exact />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
-        <Route path='/send/:receiverID' element={<Landing />} exact />
+        <Route path='/send/:receiver' element={<Send />} exact />
         <Route path='/user/home' element={<Home />} exact />
         <Route path='/user/inbox' element={<Inbox />} />
         <Route path='/user/inbox/:messageID' element={<Message />} />

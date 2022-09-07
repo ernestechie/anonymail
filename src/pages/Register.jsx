@@ -48,7 +48,7 @@ const Register = () => {
         setDoc(doc(db, 'users', credential.user.uid), {
           email,
           messages: [],
-          referral_link: `http:localhost:3000/send/${username}`,
+          referral_link: `https://anonymail.netlify.app/send/${username}`,
           timeStamp: serverTimestamp(),
           username,
         }).then(() => {
