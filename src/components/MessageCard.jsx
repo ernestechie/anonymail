@@ -14,7 +14,8 @@ const MessageCard = (props) => {
       <h2 className='font-black text-purple-700 text-lg'>Message: </h2>
       <h2>{props.text}</h2>
       <h2 className='font-black text-purple-700 my-2 text-sm'>
-        TIME: [{day}-{month}-{year} {hour}-{minute}]
+        TIME: [{day}-{month}-{year} {hour}-
+        <span>{minute < 10 ? `0${minute}` : `${minute}`}</span>]
       </h2>
       <Link
         to={`/user/inbox/${props.path}`}

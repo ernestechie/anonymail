@@ -16,10 +16,14 @@ const Inbox = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const docRef = doc(db, 'users', user.uid);
-        getDoc(docRef).then((snapshot) => {
-          setMessages(() => [...snapshot.data().messages]);
-          setIsLoading(false);
-        });
+        getDoc(docRef)
+          .then((snapshot) => {
+            setMessages(() => [...snapshot.data().messages]);
+            setIsLoading(false);
+          })
+          .catch(() => {
+            setIsLoading(false);
+          });
       }
     });
   }, []);
@@ -27,6 +31,8 @@ const Inbox = () => {
   useEffect(() => {
     getMessages();
   }, [getMessages]);
+
+  const sortedMessages = messages.reverse();
 
   return (
     <>
@@ -41,7 +47,7 @@ const Inbox = () => {
             <h1 className='font-bold text-2xl p-8'>You have no messages</h1>
           )}
 
-          {messages.map((message) => (
+          {sortedMessages.map((message) => (
             <MessageCard
               key={message.ID}
               text={message.text}

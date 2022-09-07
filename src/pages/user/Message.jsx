@@ -42,7 +42,7 @@ const Message = () => {
     <section className='overflow-hidden h-screen bg-gray-100 py-8'>
       {isLoading && <BusyIndicator />}
       {!isLoading && (
-        <div className='max-w-[360px] m-auto py-8 h-full bg-white p-8 border-2 border-gray-800'>
+        <div className='max-w-[360px] m-auto py-8 bg-white p-8 border-2 border-gray-800'>
           <h2 className='font-black mb-2 text-xl text-purple-700'>Message: </h2>
           <h2 className='font-bold text-2xl'>{message.text}</h2>
           <div className='h-[2px] bg-purple-700 w-full my-4'></div>

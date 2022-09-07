@@ -20,12 +20,16 @@ const Home = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const docRef = doc(db, 'users', user.uid);
-        getDoc(docRef).then((snapshot) => {
-          setUsername(() => snapshot.data().username);
-          setReferralLink(() => snapshot.data().referral_link);
-          setMessages(() => [...snapshot.data().messages]);
-          setIsLoading(false);
-        });
+        getDoc(docRef)
+          .then((snapshot) => {
+            setUsername(() => snapshot.data().username);
+            setReferralLink(() => snapshot.data().referral_link);
+            setMessages(() => [...snapshot.data().messages]);
+            setIsLoading(false);
+          })
+          .catch(() => {
+            setIsLoading(false);
+          });
       }
     });
   }, [setUsername, setReferralLink, setMessages]);
