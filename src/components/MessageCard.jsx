@@ -15,14 +15,14 @@ const MessageCard = (props) => {
   const minute = timeStamp.getMinutes();
 
   return (
-    <div className='border-2 border-purple-700 p-2 mt-8 mb-16 w-full relative rounded-tr-3xl rounded-br-3xl rounded-bl-3xl'>
+    <div className='border-2 border-purple-700 p-2 mt-8 mb-10 w-full relative rounded-tr-3xl rounded-br-3xl rounded-bl-3xl'>
       <span
-        className='absolute -top-12 -left-2 bg-purple-700 p-2 text-white font-black flex items-center justify-between gap-2 transition-all duration-500 ease-in rounded-full cursor-pointer'
+        className='absolute -top-6 -left-2 bg-purple-700 p-2 text-white font-black flex items-center justify-between gap-2 transition-all duration-500 ease-in rounded-full cursor-pointer'
         onClick={toggleShowTime}
       >
         <RiTimeFill className='text-xl' />
         {showTime && (
-          <span className='text-sm'>
+          <span className='text-sm  transition-all duration-500 ease-in'>
             <span className='mr-2'>
               {day}-{month}-{year}
             </span>
@@ -32,8 +32,7 @@ const MessageCard = (props) => {
           </span>
         )}
       </span>
-      <h2 className='font-black text-purple-700'>Message: </h2>
-      <h2 className='mb-2'>{props.text}</h2>
+      <h2 className='my-3 p-1'>{props.text}</h2>
       <Link
         to={`/user/inbox/${props.path}`}
         target='_blank'

@@ -47,7 +47,7 @@ const Inbox = () => {
               <h1 className='text-purple-700 font-black text-3xl text-center'>
                 YOUR MESSAGES
               </h1>
-              <p className='font-bold text-center mt-2 mb-16'>
+              <p className='font-black text-center mt-2 mb-10 uppercase'>
                 Scroll down to see old messages
               </p>
               {messages.map((message) => (
