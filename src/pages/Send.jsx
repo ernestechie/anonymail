@@ -12,6 +12,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { BusyIndicator } from '../components';
 import { db } from '../services/firebase.config';
 
+import './Send.css';
+
 const Send = () => {
   const params = useParams();
   const [message, setMessage] = useState('');
