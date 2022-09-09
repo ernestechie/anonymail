@@ -31,7 +31,7 @@ const MessageCard = (props) => {
             </span>
             <span>
               {hour > 9 && hour < 12 && <span>{hour}:</span>}
-              {hour > 12 && <span>0{hour - 12}:</span>}
+              {hour > 12 && <span>{hour - 12}:</span>}
               {hour < 10 && <span>0{hour}:</span>}
               {minute < 10 ? `0${minute}` : `${minute}`} {period}
             </span>
