@@ -69,25 +69,25 @@ const Send = () => {
   };
 
   return (
-    <section className='page'>
+    <section className='page send'>
       <ToastContainer />
       {isLoading && <BusyIndicator />}
       <div className='max-w-[360px] m-auto py-8'>
         <form onSubmit={sendMessageHandler}>
-          <h1 className='my-4 font-bold text-2xl'>
+          <h1 className='my-4 font-bold text-3xl text-white'>
             Send message to
-            <span className='text-purple-700'> {params.receiver}</span>
+            <span className='text-purple-600'> {params.receiver}</span>
           </h1>
           <textarea
             name='message'
             id='message'
             placeholder='Start typing'
-            className='h-64 bg-transparent w-full resize-none border-2 border-purple-700 rounded-lg p-4 text-lg outline-none'
+            className='h-64 bg-transparent w-full resize-none border-2 border-purple-600 rounded-lg p-4 text-lg outline-none text-white'
             value={message}
             onChange={messageInputHandler}
           ></textarea>
           <button
-            className='bg-purple-700 px-4 py-2 text-white rounded-lg w-full'
+            className='bg-purple-600 px-4 py-2 text-white rounded-lg w-full'
             onClick={sendMessageHandler}
           >
             SEND
