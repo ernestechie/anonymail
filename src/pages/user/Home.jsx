@@ -66,7 +66,7 @@ const Home = () => {
       <section className='page h-screen bg-gray-100'>
         {isLoading && <BusyIndicator />}
         {!isLoading && (
-          <div className='max-w-[360px] text-center m-auto pt-12'>
+          <div className='max-w-[360px] text-center m-auto pt-10'>
             <ToastContainer />
             <h1 className='text-3xl font-black'>
               Welcome,{' '}
@@ -88,7 +88,12 @@ const Home = () => {
                   {' '}
                   Copy your link{' '}
                 </span>
-                and send to your friends
+                and send to your friends.
+              </p>
+              <p className='text-lg'>
+                You can also{' '}
+                <span className='font-black'>"Copy your full link"</span> and
+                send to them directly
               </p>
               <p className='text-lg'>
                 Click
@@ -98,7 +103,7 @@ const Home = () => {
                 </span>
                 or go to
                 <span className='text-purple-700 font-black'> "Inbox" </span>
-                to see what they have sent to you.
+                to see what they sent to you.
               </p>
             </div>
             {/*  */}
