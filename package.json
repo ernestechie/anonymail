@@ -7,6 +7,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "firebase": "^9.9.4",
+    "html2canvas": "^1.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
@@ -14,6 +15,7 @@
     "react-scripts": "5.0.1",
     "react-share": "^4.4.0",
     "react-toastify": "^9.0.8",
+    "use-react-screenshot": "^3.0.0",
     "uuidv4": "^6.2.13",
     "web-vitals": "^2.1.4"
   },
