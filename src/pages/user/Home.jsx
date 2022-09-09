@@ -16,6 +16,12 @@ import useUserContext from '../../context/userContext';
 import { auth, db } from '../../services/firebase.config';
 import useAuth from '../../services/useAuth';
 
+import {
+  FacebookShareButton,
+  InstapaperShareButton,
+  WhatsappShareButton,
+} from 'react-share';
+
 const Home = () => {
   useAuth();
   const { setUsername, setReferralLink, username, referralLink, setMessages } =
@@ -46,12 +52,16 @@ const Home = () => {
   }, [getUserData]);
 
   const copyLinkHandler = () => {
-    navigator.clipboard.writeText(referralLink).then(() => {
-      toast.success('Link Copied', {
-        autoClose: 1000,
-        hideProgressBar: true,
+    navigator.clipboard
+      .writeText(
+        `Send an anonymous message to me 😊❤️ I won't know who sent it 👇🏼👇🏼 \n ${referralLink}`
+      )
+      .then(() => {
+        toast.success('Link Copied', {
+          autoClose: 1000,
+          hideProgressBar: true,
+        });
       });
-    });
   };
 
   return (
@@ -102,18 +112,46 @@ const Home = () => {
               >
                 View messages <FaArrowRight />
               </Link>
-              <button className='home-share-btn bg-green-500'>
+              <WhatsappShareButton
+                title={`Send an anonymous message to me 😊❤️ I won't know who sent it 👇🏼👇🏼`}
+                url={referralLink}
+                className='home-share-btn bg-green-500'
+                style={{
+                  background: '#22c55e',
+                  paddingBlock: '.5rem',
+                  color: '#fff',
+                }}
+              >
                 Share on WhatsApp
                 <IoLogoWhatsapp />
-              </button>
-              <button className='home-share-btn bg-blue-900'>
+              </WhatsappShareButton>
+              <FacebookShareButton
+                quote={`Send an anonymous message to me 😊❤️ I won't know who sent it 👇🏼👇🏼`}
+                url='https://anonymail.netlify.app/send/dxmien'
+                className='home-share-btn bg-green-500'
+                style={{
+                  background: '#1e3a84',
+                  paddingBlock: '.5rem',
+                  color: '#fff',
+                }}
+              >
                 Share on Facebook
                 <IoLogoFacebook />
-              </button>
-              <button className='home-share-btn bg-red-500'>
+              </FacebookShareButton>
+              <InstapaperShareButton
+                title={`Send an anonymous message to me ❤️ I won't know who sent it 👇🏼`}
+                url={referralLink}
+                description='With AnonyMail, you can receive messages from your friends without knowing who sent them. It is a fun game😉😉 TRY IT NOW!! 😊❤️'
+                className='home-share-btn bg-green-500'
+                style={{
+                  background: '#ef4444',
+                  paddingBlock: '.5rem',
+                  color: '#fff',
+                }}
+              >
                 Share on Instagram
                 <IoLogoInstagram />
-              </button>
+              </InstapaperShareButton>
             </div>
           </div>
         )}
