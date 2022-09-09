@@ -52,16 +52,12 @@ const Home = () => {
   }, [getUserData]);
 
   const copyLinkHandler = () => {
-    navigator.clipboard
-      .writeText(
-        `Send an anonymous message to me 😊❤️ I won't know who sent it 👇🏼👇🏼 \n ${referralLink}`
-      )
-      .then(() => {
-        toast.success('Link Copied', {
-          autoClose: 1000,
-          hideProgressBar: true,
-        });
+    navigator.clipboard.writeText(referralLink).then(() => {
+      toast.success('Link Copied', {
+        autoClose: 1000,
+        hideProgressBar: true,
       });
+    });
   };
 
   return (
@@ -105,6 +101,7 @@ const Home = () => {
                 to see what they have sent to you.
               </p>
             </div>
+            {/*  */}
             <div className='mt-8'>
               <Link
                 to='/user/inbox'
@@ -112,6 +109,24 @@ const Home = () => {
               >
                 View messages <FaArrowRight />
               </Link>
+              <button
+                onClick={() => {
+                  navigator.clipboard
+                    .writeText(
+                      `Send an anonymous message to me 😊❤️ I won't know who sent it 👇🏼👇🏼\n${referralLink}`
+                    )
+                    .then(() => {
+                      toast.success('Link copied', {
+                        autoClose: 3000,
+                        hideProgressBar: true,
+                      });
+                    });
+                }}
+                className='home-share-btn bg-gray-800 cursor-pointer'
+              >
+                Copy full link
+                <IoCopySharp />
+              </button>
               <WhatsappShareButton
                 title={`Send an anonymous message to me 😊❤️ I won't know who sent it 👇🏼👇🏼`}
                 url={referralLink}

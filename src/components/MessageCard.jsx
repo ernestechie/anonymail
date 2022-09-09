@@ -14,6 +14,8 @@ const MessageCard = (props) => {
   const hour = timeStamp.getHours();
   const minute = timeStamp.getMinutes();
 
+  const period = hour < 12 ? 'AM' : 'PM';
+
   return (
     <div className='border-2 border-purple-700 p-2 mt-8 mb-10 w-full relative rounded-tr-3xl rounded-br-3xl rounded-bl-3xl'>
       <span
@@ -27,7 +29,10 @@ const MessageCard = (props) => {
               {day}-{month}-{year}
             </span>
             <span>
-              {hour}- {minute < 10 ? `0${minute}` : `${minute}`}
+              {hour > 9 && hour < 12 && <span>{hour}:</span>}
+              {hour > 12 && <span>0{hour - 12}:</span>}
+              {hour < 10 && <span>0{hour}:</span>}
+              {minute < 10 ? `0${minute}` : `${minute}`} {period}
             </span>
           </span>
         )}
