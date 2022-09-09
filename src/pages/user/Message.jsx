@@ -38,6 +38,8 @@ const Message = () => {
     getMessage();
   }, [getMessage]);
 
+  const cardStyle = {};
+
   return (
     <section className='overflow-hidden h-screen bg-gray-100 py-8'>
       {isLoading && <BusyIndicator />}
@@ -45,9 +47,7 @@ const Message = () => {
         <div className='max-w-[360px] m-auto'>
           <div
             className='w-full m-auto py-8 bg-transparent p-8 border-2 border-gray-800 rounded-xl'
-            style={{
-              background: 'linear-gradient(red, green, blue)',
-            }}
+            style={cardStyle}
           >
             <h2 className='font-black mb-2 text-xl text-purple-700'>
               Message:{' '}
