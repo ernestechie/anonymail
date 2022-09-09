@@ -15,6 +15,8 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
 import { auth, db } from '../services/firebase.config';
 
+import './Register.css';
+
 const Register = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
@@ -74,7 +76,9 @@ const Register = () => {
     <div className='page register'>
       <ToastContainer className='font-bold text-gray-900' />
       <div className='form'>
-        <h1 className='text-center font-bold text-3xl uppercase'>Register</h1>
+        <h1 className='text-center font-bold text-3xl uppercase text-white'>
+          Register
+        </h1>
         {isLoading && <BusyIndicator />}
         <form className='mt-10'>
           <div className='input-group'>
@@ -133,7 +137,7 @@ const Register = () => {
           </button>
         </form>
         <div className='mt-2 text-center'>
-          <p className='font-medium '>
+          <p className='font-medium text-white'>
             Already have an account?{' '}
             <span className='text-purple-700 font-bold'>
               <Link to='/login'> Login</Link>

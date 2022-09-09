@@ -16,6 +16,8 @@ import useUserContext from '../../context/userContext';
 import { auth, db } from '../../services/firebase.config';
 import useAuth from '../../services/useAuth';
 
+import './Home.css';
+
 import {
   FacebookShareButton,
   InstapaperShareButton,
@@ -63,19 +65,19 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      <section className='page h-screen bg-gray-100'>
+      <section className='page h-screen bg-gray-100 home'>
         {isLoading && <BusyIndicator />}
         {!isLoading && (
           <div className='max-w-[360px] text-center m-auto pt-10'>
             <ToastContainer />
-            <h1 className='text-3xl font-black'>
+            <h1 className='text-3xl font-black text-white'>
               Welcome,{' '}
-              <span className='uppercase font-black text-purple-700'>
+              <span className='uppercase font-black text-purple-600'>
                 {username}
               </span>
             </h1>
             <p className='my-2 font-bold text-lg'>Your Link</p>
-            <div className='text-white bg-gray-800 p-2 rounded-xl flex items-center justify-center gap-4 w-full'>
+            <div className='text-white bg-gray-800 p-2 rounded-xl flex items-center justify-center gap-4 w-full blurred'>
               <span>{referralLink}</span>
               <IoCopySharp
                 className='cursor-pointer'
@@ -83,19 +85,19 @@ const Home = () => {
               />
             </div>
             <div className='my-4'>
-              <p className='text-lg mb-2'>
-                <span className='text-purple-700 font-black'>
+              <p className='text-lg mb-2 text-white'>
+                <span className='text-purple-600 font-black'>
                   {' '}
                   Copy your link{' '}
                 </span>
                 and send to your friends.
               </p>
-              <p className='text-lg'>
+              <p className='text-lg text-white'>
                 You can also{' '}
                 <span className='font-black'>"Copy your full link"</span> and
                 send to them directly
               </p>
-              <p className='text-lg'>
+              <p className='text-lg text-white'>
                 Click
                 <span className='text-purple-700 font-black'>
                   {' '}
@@ -110,7 +112,7 @@ const Home = () => {
             <div className='mt-8'>
               <Link
                 to='/user/inbox'
-                className='w-full px-4 py-2 my-2 rounded-full text-white bg-purple-700 flex items-center justify-center gap-2'
+                className='w-full px-4 py-2 my-2 rounded-full text-white flex items-center justify-center gap-2 blurred'
               >
                 View messages <FaArrowRight />
               </Link>

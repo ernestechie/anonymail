@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { RiTimeFill } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
+import './MessageCard.css';
 
 const MessageCard = (props) => {
   const timeStamp = new Date(props.timeStamp.seconds * 1000);
@@ -17,14 +18,14 @@ const MessageCard = (props) => {
   const period = hour < 12 ? 'AM' : 'PM';
 
   return (
-    <div className='border-2 border-purple-700 p-2 mt-8 mb-10 w-full relative rounded-tr-3xl rounded-br-3xl rounded-bl-3xl'>
+    <div className='border-2 border-purple-500 p-2 mt-8 mb-10 w-full relative rounded-tr-3xl rounded-br-3xl rounded-bl-3xl message-card'>
       <span
-        className='absolute -top-6 -left-2 bg-purple-700 p-2 text-white font-black flex items-center justify-between gap-2 transition-all duration-500 ease-in rounded-full cursor-pointer'
+        className='absolute -top-6 -left-2 bg-purple-500 p-2 text-white font-black flex items-center justify-between gap-2 transition-all duration-500 ease-in rounded-full cursor-pointer'
         onClick={toggleShowTime}
       >
         <RiTimeFill className='text-xl' />
         {showTime && (
-          <span className='text-sm  transition-all duration-500 ease-in'>
+          <span className='text-sm'>
             <span className='mr-2'>
               {day}-{month}-{year}
             </span>
@@ -37,7 +38,7 @@ const MessageCard = (props) => {
           </span>
         )}
       </span>
-      <h2 className='my-3 p-1'>{props.text}</h2>
+      <h2 className='my-3 p-1 text-white'>{props.text}</h2>
       <Link
         to={`/user/inbox/${props.path}`}
         target='_blank'

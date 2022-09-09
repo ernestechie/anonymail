@@ -1,5 +1,6 @@
 import { RiHome5Fill, RiMessage3Fill, RiSettings3Fill } from 'react-icons/ri';
 import { NavLink } from 'react-router-dom';
+import './Navbar.css';
 
 const Navbar = () => {
   return (
@@ -8,7 +9,9 @@ const Navbar = () => {
         <NavLink
           to='/user/home'
           className={(props) =>
-            `${props.isActive && 'text-purple-700 font-extrabold'}`
+            `${
+              props.isActive ? 'text-purple-600 font-extrabold' : 'text-white'
+            }`
           }
         >
           <span className='nav-item'>
@@ -16,11 +19,12 @@ const Navbar = () => {
             <p>Home</p>
           </span>
         </NavLink>
-
         <NavLink
           to='/user/inbox'
           className={(props) =>
-            `${props.isActive && 'text-purple-700 font-extrabold'}`
+            `${
+              props.isActive ? 'text-purple-600 font-extrabold' : 'text-white'
+            }`
           }
         >
           <span className='nav-item'>
@@ -28,11 +32,12 @@ const Navbar = () => {
             <p>Inbox</p>
           </span>
         </NavLink>
-
         <NavLink
           to='/user/settings'
           className={(props) =>
-            `${props.isActive && 'text-purple-700 font-extrabold'}`
+            `${
+              props.isActive ? 'text-purple-600 font-extrabold' : 'text-white'
+            }`
           }
         >
           <span className='nav-item'>

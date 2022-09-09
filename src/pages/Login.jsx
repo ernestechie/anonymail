@@ -13,6 +13,8 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { auth, db } from '../services/firebase.config';
 
+import './Login.css';
+
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -58,7 +60,9 @@ const Login = () => {
     <div className='page login'>
       <ToastContainer className='font-bold text-gray-900' />
       <div className='form'>
-        <h1 className='text-center font-bold text-3xl uppercase'>LOGIN</h1>
+        <h1 className='text-center font-bold text-3xl uppercase text-white'>
+          LOGIN
+        </h1>
         {isLoading && <BusyIndicator />}
         <form className='mt-10'>
           <div className='input-group'>
@@ -103,7 +107,7 @@ const Login = () => {
           </button>
         </form>
         <div className='mt-2 text-center'>
-          <p className='font-medium'>
+          <p className='font-medium text-white'>
             New to AnonyMail?{' '}
             <span className='text-purple-700 font-bold'>
               <Link to='/register'> Register</Link>

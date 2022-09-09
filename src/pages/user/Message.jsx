@@ -60,10 +60,10 @@ const Message = () => {
   }, [getMessage]);
 
   return (
-    <section className='overflow-hidden py-8 background' ref={ref}>
+    <section className='overflow-hidden h-screen py-8 background' ref={ref}>
       {isLoading && <BusyIndicator />}
       {!isLoading && (
-        <div className=' max-w-[360px] m-auto flex items-center justify-center flex-col'>
+        <div className='h-full max-w-[360px] m-auto flex items-center justify-center flex-col'>
           <div className='w-full m-auto p-8 rounded-xl card'>
             <h2 className='font-bold mb-2 text-lg text-purple-400'>Message:</h2>
             <h2 className='font-bold text-2xl text-white'>{message.text}</h2>

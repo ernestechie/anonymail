@@ -1,0 +1,41 @@
+.inbox .message-card {
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  position: relative;
+  background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+}
+
+.inbox .message-card:nth-child(odd):before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.1),
+    rgba(126, 34, 206, 0.5)
+  );
+}
+
+.inbox .message-card:nth-child(even):before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(
+    150deg,
+    rgba(0, 0, 0, 0.1),
+    rgba(126, 34, 206, 0.5)
+  );
+}

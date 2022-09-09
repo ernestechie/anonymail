@@ -27,11 +27,11 @@ body::-webkit-scrollbar-thumb {
   }
 
   .input-group label {
-    @apply block font-bold uppercase text-sm;
+    @apply block font-bold uppercase text-sm text-white;
   }
 
   .input-group input {
-    @apply py-3 my-2 border-2 border-purple-700 w-full rounded-md outline-none pl-10;
+    @apply py-3 my-2 border border-white w-full rounded-md outline-none pl-10 bg-transparent text-white;
   }
 
   .input-group .icon {
@@ -39,11 +39,11 @@ body::-webkit-scrollbar-thumb {
   }
 
   .input-group .icon-reverse {
-    @apply absolute top-[3.2rem] right-6 text-xl text-purple-700;
+    @apply absolute top-[3.2rem] right-6 text-xl text-white;
   }
 
   .input-group .icon * {
-    @apply text-purple-700;
+    @apply text-white;
   }
 
   .page {
@@ -60,7 +60,7 @@ body::-webkit-scrollbar-thumb {
   }
 
   .page .form {
-    @apply h-[560px] max-w-[400px] p-6 bg-white w-full py-10 rounded-xl;
+    @apply h-[560px] max-w-[400px] p-6 w-full py-10 rounded-xl;
   }
   .page .form .submit-button {
     @apply bg-purple-700 w-full p-3 rounded-md font-bold text-white hover:bg-purple-800 duration-300 transition;
@@ -71,7 +71,7 @@ body::-webkit-scrollbar-thumb {
   }
 
   .navbar {
-    @apply fixed bottom-0 right-0 p-3 w-full shadow-2xl z-10 bg-white h-16;
+    @apply fixed bottom-0 right-0 p-3 w-full shadow-2xl z-10 h-16;
   }
 
   .navbar .nav-item {
