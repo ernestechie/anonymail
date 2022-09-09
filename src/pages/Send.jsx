@@ -71,7 +71,7 @@ const Send = () => {
   };
 
   return (
-    <section className='page send'>
+    <section className='page send h-screen w-screen'>
       <ToastContainer />
       {isLoading && <BusyIndicator />}
       <div className='max-w-[360px] m-auto py-8'>
