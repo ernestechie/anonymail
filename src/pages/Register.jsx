@@ -1,18 +1,21 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-// ? React Icons
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { FiLock } from 'react-icons/fi';
 import { HiOutlineUser } from 'react-icons/hi';
 import { IoMailOutline } from 'react-icons/io5';
-// ? React Toastify
+import { Link, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// ? Components
 import { BusyIndicator } from '../components';
 
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
+import {
+  collection,
+  doc,
+  getDocs,
+  serverTimestamp,
+  setDoc,
+} from 'firebase/firestore';
 import { auth, db } from '../services/firebase.config';
 
 import './Register.css';
@@ -34,7 +37,7 @@ const Register = () => {
   };
 
   const usernameChangeHandler = (e) => {
-    setUsername(e.target.value);
+    setUsername(e.target.value.toLowerCase());
   };
 
   const passwordChangeHandler = (e) => {
@@ -45,31 +48,60 @@ const Register = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((credential) => {
-        setDoc(doc(db, 'users', credential.user.uid), {
-          email,
-          messages: [],
-          referral_link: `https://anonymail.netlify.app/send/${username}`,
-          timeStamp: serverTimestamp(),
-          username,
-        }).then(() => {
-          toast.success('Account created', {
-            autoClose: 2000,
+    if (
+      email.trim().length > 0 &&
+      username.trim().length > 0 &&
+      password.length > 0
+    ) {
+      getDocs(collection(db, 'users')).then((cred) => {
+        const currentUsername = cred.docs.find(
+          (doc) => doc.data().username === username
+        );
+        const currentEmail = cred.docs.find(
+          (doc) => doc.data().email === email
+        );
+        if (currentUsername) {
+          toast.error('😉 Username has been taken 🙏🏾', {
+            autoClose: 3000,
+            hideProgressBar: true,
           });
-
-          setTimeout(() => {
-            setIsLoading(false);
-            navigate('/user/home');
-          }, 1000);
-        });
-      })
-      .catch((error) => {
-        toast.error(error.code, {
-          autoClose: 3000,
-        });
-        setIsLoading(false);
+        }
+        if (currentEmail) {
+          toast.error('😒 Email already in use 😒', {
+            autoClose: 3000,
+            hideProgressBar: true,
+          });
+        } else {
+          setIsLoading(true);
+          createUserWithEmailAndPassword(auth, email, password)
+            .then((credential) => {
+              setDoc(doc(db, 'users', credential.user.uid), {
+                email,
+                messages: [],
+                referral_link: `https://anonymail.netlify.app/send/${username}`,
+                timeStamp: serverTimestamp(),
+                username,
+              }).then(() => {
+                setIsLoading(false);
+                navigate('/user/home');
+              });
+            })
+            .catch((error) => {
+              toast.error(error.code, {
+                autoClose: 2000,
+              });
+              setIsLoading(false);
+            });
+        }
       });
+      setIsLoading(false);
+    } else {
+      toast.error('😒 All fields must be filled 😡', {
+        autoClose: 2000,
+        hideProgressBar: true,
+      });
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -94,7 +126,6 @@ const Register = () => {
               <IoMailOutline />
             </span>
           </div>
-          {/*  */}
           <div className='input-group'>
             <label htmlFor='username'>Username</label>
             <input
@@ -108,7 +139,6 @@ const Register = () => {
               <HiOutlineUser />
             </span>
           </div>
-          {/*  */}
           <div className='input-group'>
             <label htmlFor='password'>Password</label>
             <input

@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { BusyIndicator, MessageCard, Navbar } from '../../components/index';
 import { auth, db } from '../../services/firebase.config';
 import useAuth from '../../services/useAuth';
-import './Inbox.css';
+import './Page.css';
 
 const Inbox = () => {
   useAuth();
@@ -36,12 +36,16 @@ const Inbox = () => {
       <Navbar />
       {isLoading && <BusyIndicator />}
       <section className='page inbox pb-8'>
-        <div className='max-w-[360px] m-auto pt-8'>
+        <div className='max-w-[400px] m-auto pt-8'>
           {!isLoading && !messages && (
-            <h1 className='font-bold text-2xl p-8 '>You have no messages</h1>
+            <h1 className='font-bold text-3xl p-8 h-screen text-white'>
+              You have no messages
+            </h1>
           )}
           {!isLoading && messages.length === 0 && (
-            <h1 className='font-bold text-2xl p-8'>You have no messages</h1>
+            <h1 className='font-bold text-3xl p-8 h-screen text-white'>
+              You have no messages
+            </h1>
           )}
           {!isLoading && messages.length > 0 && (
             <div>

@@ -16,7 +16,7 @@ import useUserContext from '../../context/userContext';
 import { auth, db } from '../../services/firebase.config';
 import useAuth from '../../services/useAuth';
 
-import './Home.css';
+import './Page.css';
 
 import {
   FacebookShareButton,
@@ -68,7 +68,7 @@ const Home = () => {
       <section className='page h-screen bg-gray-100 home'>
         {isLoading && <BusyIndicator />}
         {!isLoading && (
-          <div className='max-w-[360px] text-center m-auto pt-10'>
+          <div className='max-w-[400px] text-center m-auto pt-10'>
             <ToastContainer />
             <h1 className='text-3xl font-black text-white'>
               Welcome,{' '}

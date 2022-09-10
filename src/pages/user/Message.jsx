@@ -6,9 +6,12 @@ import { useParams } from 'react-router-dom';
 import { createFileName, useScreenshot } from 'use-react-screenshot';
 import { BusyIndicator } from '../../components';
 import { auth, db } from '../../services/firebase.config';
-import './Message.css';
+import useAuth from '../../services/useAuth';
+import './Page.css';
 
 const Message = () => {
+  useAuth();
+
   const params = useParams();
   const [message, setMessage] = useState([]);
   const [username, setUsername] = useState([]);
