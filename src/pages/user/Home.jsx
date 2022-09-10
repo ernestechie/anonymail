@@ -2,27 +2,16 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { useCallback, useEffect, useState } from 'react';
 import { FaArrowRight } from 'react-icons/fa';
-import {
-  IoCopySharp,
-  IoLogoFacebook,
-  IoLogoInstagram,
-  IoLogoWhatsapp,
-} from 'react-icons/io5';
+import { IoCopySharp, IoLogoFacebook, IoLogoWhatsapp } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
+import { FacebookShareButton, WhatsappShareButton } from 'react-share';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BusyIndicator, Navbar } from '../../components';
 import useUserContext from '../../context/userContext';
 import { auth, db } from '../../services/firebase.config';
 import useAuth from '../../services/useAuth';
-
 import './Page.css';
-
-import {
-  FacebookShareButton,
-  InstapaperShareButton,
-  WhatsappShareButton,
-} from 'react-share';
 
 const Home = () => {
   useAuth();
@@ -160,20 +149,6 @@ const Home = () => {
                 Share on Facebook
                 <IoLogoFacebook />
               </FacebookShareButton>
-              <InstapaperShareButton
-                title={`Send an anonymous message to me ❤️ I won't know who sent it 👇🏼`}
-                url={referralLink}
-                description='With AnonyMail, you can receive messages from your friends without knowing who sent them. It is a fun game😉😉 TRY IT NOW!! 😊❤️'
-                className='home-share-btn bg-green-500'
-                style={{
-                  background: '#ef4444',
-                  paddingBlock: '.5rem',
-                  color: '#fff',
-                }}
-              >
-                Share on Instagram
-                <IoLogoInstagram />
-              </InstapaperShareButton>
             </div>
           </div>
         )}
