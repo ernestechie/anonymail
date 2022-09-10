@@ -20,8 +20,8 @@ const Inbox = () => {
         setIsLoading(true);
 
         onSnapshot(doc(db, 'users', user.uid), (doc) => {
-          setMessages(doc.data().messages.reverse());
           setIsLoading(false);
+          setMessages(doc.data().messages.reverse());
         });
       }
     });

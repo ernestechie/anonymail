@@ -85,4 +85,16 @@ body::-webkit-scrollbar-thumb {
   .home-share-btn {
     @apply w-full px-4 py-2 my-2 rounded-lg text-white  flex items-center justify-center gap-2;
   }
+
+  .settings button.settings-button {
+    @apply text-lg my-4 bg-gray-800 text-white p-3 w-full rounded-2xl hover:bg-gray-900 duration-500 flex items-center justify-center gap-2;
+  }
+
+  .settings button.settings-button-2 {
+    @apply text-lg my-4 text-white p-3 w-full rounded-full duration-500 flex items-center justify-center gap-2;
+  }
+
+  .settings button.settings-button-2:nth-child(odd) {
+    @apply bg-red-600 hover:bg-red-700;
+  }
 }

@@ -65,8 +65,7 @@ const Register = () => {
             autoClose: 3000,
             hideProgressBar: true,
           });
-        }
-        if (currentEmail) {
+        } else if (currentEmail) {
           toast.error('😒 Email already in use 😒', {
             autoClose: 3000,
             hideProgressBar: true,
